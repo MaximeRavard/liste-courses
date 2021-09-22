@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste de course{% endblock %}
+
+{% block body %}
+    <h1>Voici votre liste de course : </h1>
+    <div class="content">
+        <ul>
+            {% for element in listecourses %}
+                <li> <span  id="{{ element.id }}" {% if element.achete == true %} style="text-decoration: line-through" {% endif %}>{{ element.nom }}</span><a href="{{ path('supprAliment', {id:element.id}) }}"><i class="fas fa-trash"></i></a>
+                    <a href="{{ path('checkAliment', {id:element.id}) }}"><i class="far fa-check-square"></i></a></li>
+            {% endfor %}
+        </ul>
+        <div class="ajout-aliment">
+            Ajouter un aliment :
+            {{ form_start(alimentForm) }}
+            {{ form_widget(alimentForm) }}
+            <button type="submit" class="btn btn-successe"> <i class="fa fa-plus"></i></button>
+            {{ form_end(alimentForm) }}
+        </div>
+    </div>
+{% endblock %}
